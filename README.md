@@ -22,6 +22,9 @@ For Docker: `docker compose up --build` (when Docker Desktop is installed).
 
 The UI is a Vite frontend under `frontend/`; run `npm install` then `npm run dev`. Set `VITE_API_URL=http://127.0.0.1:8000` if needed.
 
+## Hosted deployment
+Deploy this repository root to Railway; it uses `Dockerfile` and `/health` for its health check. Deploy `frontend/` as a Vercel project, set `VITE_API_URL` to the Railway public API URL (without a trailing slash), then redeploy the frontend.
+
 ## Honest data policy
 `WEATHER_PROVIDER=openmeteo` makes a live, unauthenticated request to Open-Meteo. If the request fails, or `WEATHER_PROVIDER=mock`, the UI labels deterministic demo data as **Mock / demo**. No official warnings are claimed: warnings are local rule-engine outputs unless an authorized official feed is added.
 
