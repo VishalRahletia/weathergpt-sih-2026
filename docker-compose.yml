@@ -1,0 +1,20 @@
+services:
+  api:
+    build: ./backend
+    ports: ["8000:8000"]
+    environment:
+      WEATHER_PROVIDER: ${WEATHER_PROVIDER:-mock}
+      DATABASE_URL: postgresql+psycopg://weathergpt:weathergpt@db:5432/weathergpt
+      REDIS_URL: redis://redis:6379/0
+    depends_on: [db, redis]
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: weathergpt
+      POSTGRES_USER: weathergpt
+      POSTGRES_PASSWORD: weathergpt
+    volumes: [postgres_data:/var/lib/postgresql/data]
+  redis:
+    image: redis:7-alpine
+volumes:
+  postgres_data:
